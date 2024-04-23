@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+ * Copyright (c) 2021-Present, Okta, Inc. and/or its affiliates. All rights reserved.
+ * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
+ *
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and limitations under the License.
+ */
 
-function App() {
+import React from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
+import { Security } from '@okta/okta-react';
+import { Container } from 'semantic-ui-react';
+//import config from './config';
+import Navbar from './Navbar';
+import Routes from './components/Routes';
+
+// export const oktaAuthConfig = {
+//   issuer: 'https://dev-66252224.okta.com/oauth2/default',
+//   clientId: '0oagfoiug3ZDqbLQU5d7',
+//   redirectUri: `${window.location.origin}/login/callback`,
+//   scopes: ["openid", "profile", "email"],
+//   pkce: true,
+// };
+
+export const oktaAuthConfig = {
+  issuer: 'https://cytel.oktapreview.com/oauth2/default',
+  clientId: '0oadwgalz5kemcWBa1d7',
+  redirectUri: 'https://fitforpurpose-dev1.cytel.com/login/callback',
+  scopes: ["openid", "profile", "email"],
+  pkce: true,
+};
+
+const oktaAuth = new OktaAuth(oktaAuthConfig);
+
+const App = () => {
+  const navigate = useNavigate();
+  const restoreOriginalUri = (_oktaAuth,  originalUri) => {
+    navigate(toRelativeUrl(originalUri || '/', window.location.origin));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri}>
+      <Container text style={{marginTop: '7em'}} className="App">
+        <header className="App-header">
+          <Navbar/>
+        </header>
+        <main>
+          <Routes />
+        </main>
+      </Container>
+    </Security>
   );
-}
-
+};
 export default App;
