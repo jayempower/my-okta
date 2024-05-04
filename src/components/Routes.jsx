@@ -23,6 +23,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" exact={true} element={<Home/>}/>
+      <Route path="/logout" exact={true} element={<Home/>}/>
       <Route path="login/callback" element={<LoginCallback loadingElement={<Loading/>}/>}/>
       {/* <Route path="/messages" element={<RequiredAuth/>}>
         <Route path="" element={<Messages/>}/>

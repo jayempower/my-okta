@@ -19,7 +19,10 @@ const Navbar = () => {
   const { authState, oktaAuth } = useOktaAuth();
 
   const login = async () => oktaAuth.signInWithRedirect();
-  const logout = async () => oktaAuth.signOut();
+  const logout = async () => oktaAuth.signOut({
+    postLogoutRedirectUri:"http://localhost:3000/logout"
+  });
+  // const logout = async () => oktaAuth.signOut();
 
   if (!authState) {
     return null;

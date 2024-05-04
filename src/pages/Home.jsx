@@ -48,10 +48,11 @@ const Home = () => {
     },
   ];
 
-  if (!authState) {
-    return (
-      <div>Loading...</div>
-    );
+  if (authState == null || !authState || !authState.isAuthenticated) {
+    oktaAuth.signInWithRedirect();
+    // return (
+    //   <div>Loading...</div>
+    // );
   }
 
   return (

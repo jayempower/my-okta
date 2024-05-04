@@ -24,14 +24,16 @@ import Routes from './components/Routes';
 //   issuer: 'https://dev-66252224.okta.com/oauth2/default',
 //   clientId: '0oagfoiug3ZDqbLQU5d7',
 //   redirectUri: `${window.location.origin}/login/callback`,
+//   //redirectUri: 'http://localhost:3000/login/callback',
 //   scopes: ["openid", "profile", "email"],
 //   pkce: true,
 // };
 
 export const oktaAuthConfig = {
   issuer: 'https://cytel.oktapreview.com/oauth2/default',
-  clientId: '0oadwgalz5kemcWBa1d7',
-  redirectUri: 'https://fitforpurpose-dev1.cytel.com/login/callback',
+  clientId: '0oae8mdmlox9wC5K21d7',
+  //redirectUri: 'https://fitforpurpose-dev1.cytel.com/login/callback',
+  redirectUri: 'http://localhost:3000/login/callback',
   scopes: ["openid", "profile", "email"],
   pkce: true,
 };
